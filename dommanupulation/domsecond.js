@@ -1,67 +1,48 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
+var form = document.querySelector('#addForm');
+form.addEventListener('submit',additem);
+var ul = document.getElementById('items')
+ul.addEventListener('click', removeitem);
+var filter = document.querySelector('#filter');
+filter.addEventListener('keyup', filteritem);
 
-// Form submit event
-form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
-// Filter event
-filter.addEventListener('keyup', filterItems);
 
-// Add item
-function addItem(e){
+
+function additem(e){
   e.preventDefault();
-
-  // Get input value
-  var newItem = document.getElementById('item').value;
-
-  // Create new li element
-  var li = document.createElement('li');
-  // Add class
-  li.className = 'list-group-item';
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
-
-  // Create del button element
-  var deleteBtn = document.createElement('button');
-
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
-
-  // Append button to li
-  li.appendChild(deleteBtn);
-
-  // Append li to list
-  itemList.appendChild(li);
+  let item = document.querySelector('#item');
+  let input = document.createTextNode(item.value);
+  
+  let li = document.createElement('li')
+  li.className = "list-group-item";
+  li.appendChild(input)
+  
+  ul.appendChild(li);
+  let button = document.createElement('button')
+  button.className = "btn btn-danger btn-sm float-right delete"
+  button.innerHTML = "x";
+  li.appendChild(button)
+  item.value = "";
 }
+function removeitem(e){
+ if(e.target.classList.contains('delete')){
+  if(confirm('are you sure to delete')){
+  let list = e.target.parentElement;
+  ul.removeChild(list)
+ }
+}
+}
+function filteritem(e){
+let text= e.target.value.toLowerCase();
 
-// Remove item
-function removeItem(e){
-  if(e.target.classList.contains('delete')){
-    if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
-    }
+let item = document.getElementsByTagName('li');
+Array.from(item).forEach(function(i){
+  let itemname = i.firstChild.textContent;
+  console.log(itemname);
+  if(itemname.toLowerCase().indexOf(text) != -1){
+  
+    i.style.display = 'block';
+  } else {
+    i.style.display = 'none';
   }
-}
-
-// Filter Items
-function filterItems(e){
-  // convert text to lowercase
-  var text = e.target.value.toLowerCase();
-  // Get lis
-  var items = itemList.getElementsByTagName('li');
-  // Convert to an array
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
+})
 }

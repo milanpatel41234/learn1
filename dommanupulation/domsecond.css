@@ -1,17 +1,37 @@
 header{
-    background-color: darkturquoise;
+    background-color: green;
+}
+h1{
+    color: white;
 }
 .search{
-    margin-left: 75%;
+    margin-top: 5px;
+    margin-right: 5px;
+    float: right; 
 }
+.btnsearch{
+    margin-top: 5px;
+    float: right;
+}
+
 .list-group{
-    border: solid 2px;
+    
 
 }
 .list-group-item{
-    margin-bottom: 5px;
-    margin-top: 5px;
+   block-size: 40px;
+    border: solid 1px;
+    font-size: large;
 }
-/* .btn{
-    margin-left: 80%;
-} */
+.float-right{
+    float: right;
+    background-color: red;
+    padding: 8px 25px;
+    border-radius: 7px;
+    margin-right: 8px;
+    cursor: pointer;
+
+}
+.card{
+    border: solid 1px;
+}
